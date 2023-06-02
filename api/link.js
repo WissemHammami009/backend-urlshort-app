@@ -12,14 +12,7 @@ const Link = require('../models/link');
 
 var assert = require('assert');
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host:"smtp.gmail.com",
-    auth: {
-      user: 'hammamiwissem21@gmail.com',
-      pass: 'fqmpninnfvwxysiu'
-    }
-  });
+var transporter = require('../plugins/mailer')
   
 router.get('/home', function(req, res, next) { 
     res.json( {connection:{status:"OK",

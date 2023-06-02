@@ -1,6 +1,5 @@
 const express = require('express')
 
-const mongodb = require('mongoose')
 
 const crypto = require('crypto')
 userroute = require('./api/user')
@@ -13,8 +12,8 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     host:"smtp.gmail.com",
     auth: {
-      user: 'hammamiwissem21@gmail.com',
-      pass: 'fqmpninnfvwxysiu'
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD
     }
   });
 
@@ -42,12 +41,4 @@ app.listen(process.env.PORT,()=>{
 })
 app.get('/get',(req,res)=>{
     res.send("ok")
-})
-mongodb.connect(process.env.MONGO_URI, { useNewUrlParser: true })
-const db = mongodb.connection
-db.once('open', _ => {
-  console.log('Database connected')
-})
-db.on('error', err => {
-  console.error('connection error:', err)
 })

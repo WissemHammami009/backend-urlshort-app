@@ -2,20 +2,13 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 const crypto = require('crypto')
-var nodemailer = require('nodemailer');
+var transporter = require('../plugins/mailer')
 router.use(bodyParser.json());
 
 const User = require('../models/user');
 
 var assert = require('assert');
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host:"smtp.gmail.com",
-    auth: {
-      user: 'hammamiwissem21@gmail.com',
-      pass: 'fqmpninnfvwxysiu'
-    }
-  });
+
 router.get('/home', function(req, res, next) { 
     res.json( {connection:{status:"OK",
     message:"Welcome to You in Home Page"}});

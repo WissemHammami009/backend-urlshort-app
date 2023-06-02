@@ -1,6 +1,6 @@
 
 const mongo = require('mongoose')
-
+var db = require('../database/connectdb');
 const Link = mongo.Schema({
     id:{
         type:String,
