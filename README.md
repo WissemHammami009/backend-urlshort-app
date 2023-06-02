@@ -33,9 +33,6 @@ create the `.env` file and update the necessary configuration variables such as 
 
 The backend server will start running on `http://localhost:3000`.
 
-## Contributing
-
-Contributions are welcome! Please refer to the [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 
