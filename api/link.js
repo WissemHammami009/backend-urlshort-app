@@ -40,7 +40,7 @@ router.post('/add',(req,res)=>{
    
     const add = new Link(data)
     add.save().then(resp=>{
-        res.status(200).json({data:{added:"yes",link:"http://localhost:3000/"+code}})
+        res.status(200).json({data:{added:"yes",link:process.env.REDIRECT_LINK+code}})
     }).catch(err=>{
         res.status(404).json({data:{added:"no",message:err.message}})
     })
@@ -63,13 +63,13 @@ router.post('/add_s',(req,res)=>{
     const add = new Link(data)
 
     add.save().then(resp=>{
-        res.status(200).json({data:{added:"yes",link:"http://localhost:3000/"+code}})
+        res.status(200).json({data:{added:"yes",link:process.env.REDIRECT_LINK+code}})
     }).catch(err=>{
         res.status(404).json({data:{added:"no",message:err.message}})
     })
 })
 //get the origin link
-router.post('/redirect/:cle',(req,res)=>{
+router.get('/redirect/:cle',(req,res)=>{
 
     let cle = req.params.cle
 
