@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 const crypto = require('crypto')
 var transporter = require('../plugins/mailer')
 router.use(bodyParser.json());
-
+var jwt = require('jsonwebtoken')
 const User = require('../models/user');
 
 var assert = require('assert');
@@ -114,13 +114,9 @@ const getdata = User.findOne(data)
         }})
         
     }
-    res.status(200).json({login: {
-        cin:req.body.cin,
-        check:true,
-        message:"Authentification Granted",
-        name: resp.name +" "+ resp.surname,
-        id:resp._id
-    }})
+    let fullname = resp.name + ' ' + resp.surname
+    let tokken = jwt.sign({fullname: fullname,email:req.body.email,password:hash},process.env.SECRET_KEY)
+    res.status(200).json({isLogged:true, user: "found!",resp,token:tokken })
     
 })
 .catch(err=>{

@@ -7,15 +7,7 @@ linkroute = require('./api/link')
 const app = express()
 require('dotenv').config()
 var bodyParser = require('body-parser')
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host:"smtp.gmail.com",
-    auth: {
-      user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  });
+
 
 app.use(bodyParser.json());
 

@@ -5,12 +5,12 @@ var bodyParser = require('body-parser')
 const crypto = require('crypto')
 var nodemailer = require('nodemailer');
 router.use(bodyParser.json());
+var isAuthenticate = require('../middleware/auth')
 
 const { body, validationResult } = require('express-validator');
 
 const Link = require('../models/link');
 
-var assert = require('assert');
 
 var transporter = require('../plugins/mailer')
   
@@ -40,7 +40,7 @@ router.post('/add',(req,res)=>{
 })
 
 //add with signin
-router.post('/add_s',(req,res)=>{
+router.post('/add_s',isAuthenticate,(req,res)=>{
 
     let code= crypto.randomBytes(6).toString('hex');
     let id= crypto.randomBytes(8).toString('hex');
@@ -56,7 +56,7 @@ router.post('/add_s',(req,res)=>{
     const add = new Link(data)
 
     add.save().then(resp=>{
-        res.status(200).json({data:{added:"yes",link:process.env.REDIRECT_LINK+code}})
+        res.status(200).json({data:{loggedas:req.user.fullname,added:"yes",link:process.env.REDIRECT_LINK+code}})
     }).catch(err=>{
         res.status(404).json({data:{added:"no",message:err.message}})
     })
