@@ -34,9 +34,10 @@ create the `.env` file and update the necessary configuration variables such as 
 The backend server will start running on `http://localhost:3000`.
 
 
-## License
+## API DOCUMENTATION 
+From Here(Postman): https://documenter.getpostman.com/view/19986591/2s93sW8aqB
 
-This project is licensed under the [MIT License](LICENSE).
+
 
 
 
