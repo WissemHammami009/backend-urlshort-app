@@ -62,7 +62,7 @@ router.post('/add_s',isAuthenticate,(req,res)=>{
     })
 })
 //get the origin link
-router.get('/redirect/:cle',(req,res)=>{
+router.get('/r/:cle',(req,res)=>{
 
     let cle = req.params.cle
 
@@ -83,7 +83,7 @@ router.get('/redirect/:cle',(req,res)=>{
 })
 
 //get links created by user  
-router.post('/get_user',(req,res)=>{
+router.post('/get_user',isAuthenticate,(req,res)=>{
     
     if (req.body.id_user == "" ||req.body.id_user ==  null) {
         return res.status(500).send("User id required")
@@ -104,17 +104,16 @@ router.post('/get_user',(req,res)=>{
 })
 
 
-router.post("/update",(req,res)=>{
+router.post("/update",isAuthenticate,(req,res)=>{
     
-    let id = req.body.id
-    delete req.body.id
-    data = req.body
-    const update = Link.updateOne({id:id},{$set:data}).then(resp=>{
+    data = {new_link:req.body.new_link}
+    const update = Link.updateOne({new_link:req.body.link},{$set:data}).then(resp=>{
         if (resp.matchedCount == 0) {
             res.json({data:{update:"no"}})
         }
         else{
-            res.json({data:{update:"yes"}})
+             let redirect = process.env.REDIRECT_LINK + req.body.new_link
+            res.json({data:{update:"yes",new_link:redirect}})
         }
     }).catch(err=>{
         res.send(err)}

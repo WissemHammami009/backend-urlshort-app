@@ -27,6 +27,7 @@ app.get('/',(req,res)=>{
 })
 app.use('/api/user/',userroute);
 app.use('/api/link/',linkroute);
+app.use('/',linkroute)
 
 app.listen(process.env.PORT,()=>{
     console.log(`server running on ${process.env.PORT} !!`)
