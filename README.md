@@ -29,6 +29,15 @@ To run the Backend URL Shortener, you'll need the following:
 
 create the `.env` file and update the necessary configuration variables such as the database connection URL and any other relevant settings.
 
+| Environment Variable | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| MONGO_URI            | URI to connect to the database                               |
+| PORT                 | The port number for the application (default: 3000)          |
+| EMAIL_USERNAME       | Username for the email account used for sending emails       |
+| EMAIL_PASSWORD       | Password for the email account used for sending emails       |
+| EMAIL_LINK           | Your application base link + "/r/"     |
+| MAIN_KEY             | JWT secret key composed of 64 bytes                          |
+
 4. Start the server:
 
 The backend server will start running on `http://localhost:3000`.
