@@ -12,7 +12,8 @@ const { body, validationResult } = require('express-validator');
 const Link = require('../models/link');
 
 
-var transporter = require('../plugins/mailer')
+var transporter = require('../plugins/mailer');
+const redirect = require('../tools/template');
   
 router.get('/home', function(req, res, next) { 
     res.json( {connection:{status:"OK",
@@ -63,7 +64,8 @@ router.post('/add_s',isAuthenticate,(req,res)=>{
 })
 //get the origin link
 router.get('/r/:cle',(req,res)=>{
-
+    let json  = req.headers
+    console.log('postman-token' in json)
     let cle = req.params.cle
 
     const find = Link.findOne({new_link:cle}).then(resp=>{
@@ -74,10 +76,12 @@ router.get('/r/:cle',(req,res)=>{
             const update = Link.updateOne({new_link:cle},{$inc:{number_of_clic:1}}).then(resp=>{
                 
             })
-            return res.status(200).json({data:{redirect:resp.origin_link,message:"200"}})
+
+            let json = {data:{redirect:resp.origin_link,message:"200"}}
+            res.send(redirect(resp.origin_link))
         }
     }).catch(err=>{
-        res.json({data:{added:"no",message:err.message}})
+        res.json({Error:{Name_code:err.code,message:err.message}})
     })
     
 })

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        .centre {
+            text-align: center;
+            width: 500px;
+            height: 100px;
+            top: 50%;
+            left: 30%;
+            position: absolute;
+        }
+        .box{
+            box-shadow: 6px 5px 5px black;
+        }
+    </style>
+</head>
+<body>
+    <div class="centre box">
+        We will go to your link in 5 second <script>window.setTimeout(function(){
+
+            // Move to a new location or you can do something else
+            window.location.href = "https://www.google.co.in";
+    
+        }, 5000);</script>
+    </div>
+</body>
+</html>
